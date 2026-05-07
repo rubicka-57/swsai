@@ -1,4 +1,4 @@
-import google.generativeai as genai
+from google import genai
 
 from utils.config import get_settings
 
@@ -31,8 +31,10 @@ def generate_grounded_answer(context: str, question: str) -> str:
     if not settings.gemini_api_key:
         raise ValueError("GEMINI_API_KEY is not configured.")
 
-    genai.configure(api_key=settings.gemini_api_key)
-    model = genai.GenerativeModel(settings.gemini_model)
-    response = model.generate_content(build_prompt(context, question))
+    client = genai.Client(api_key=settings.gemini_api_key)
+    response = client.models.generate_content(
+        model=settings.gemini_model,
+        contents=build_prompt(context, question),
+    )
     answer = (response.text or "").strip()
     return answer or FALLBACK_ANSWER

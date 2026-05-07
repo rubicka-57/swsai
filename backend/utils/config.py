@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(populate_by_name=True)
 
     gemini_api_key: str = Field(default="", alias="GEMINI_API_KEY")
-    gemini_model: str = Field(default="gemini-1.5-flash", alias="GEMINI_MODEL")
+    gemini_model: str = Field(default="gemini-2.5-flash", alias="GEMINI_MODEL")
     documents_dir: Path = Field(default=BASE_DIR / "documents", alias="DOCUMENTS_DIR")
     chroma_dir: Path = Field(default=BASE_DIR / "chroma_db", alias="CHROMA_DIR")
     collection_name: str = Field(default="company_documents", alias="COLLECTION_NAME")
